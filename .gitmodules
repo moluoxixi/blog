@@ -1,0 +1,4 @@
+[submodule "note"]
+	path = note
+	url = https://github.com/moluoxixi/note.git
+	branch = main

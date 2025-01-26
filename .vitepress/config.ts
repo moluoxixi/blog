@@ -15,6 +15,8 @@ async function config() {
 	const posts = await getPosts();
 	const pageSize = 5;
 	const postLength = await getPostLength();
+
+	const note= getSidebar('note/output');
 	return {
 		title: "moluoxixi Blog",
 		description: "",
@@ -111,7 +113,9 @@ async function config() {
 			],
 
 			// 侧边栏,配置基本同导航栏
-			sidebar: {},
+			sidebar: {
+				'/note/': note
+			},
 			socialLinks: [{ icon: "github", link: "https://github.com/componentProject/react-component" }],
 			// 搜索配置
 			search: {
