@@ -20,7 +20,7 @@ async function config() {
 		description: "",
 		base: "/blog/vitepress/",
 		lang: "zh-CN",
-		outDir: "/docs/vitepress",
+		outDir: "./docs/vitepress",
 		vite: {
 			plugins: [demoblockVitePlugin(), vueJsx()],
 			resolve: {
