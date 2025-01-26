@@ -1,0 +1,29 @@
+# 日志文件
+*.log
+*-debug.log*
+*-error.log*
+
+# 依赖
+node_modules
+*-lock.*
+
+# 打包文件
+docs
+dist
+dist-ssr
+.vitepress/cache
+.vitepress/dist
+#本地配置
+*.local
+
+# 编辑器文件
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.tsbuildinfo

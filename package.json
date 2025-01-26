@@ -1,0 +1,41 @@
+{
+  "name": "vuecomponent",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "vitepress:dev": "vitepress dev .",
+    "vitepress:build": "vitepress build .",
+    "vitepress:preview": "vitepress preview ."
+  },
+  "dependencies": {
+    "typescript": "^5.7.3",
+    "gitalk": "^1.8.0"
+  },
+  "devDependencies": {
+    "@vue/tsconfig": "^0.7.0",
+    "vitepress": "1.5.0",
+    "vitepress-theme-demoblock": "^3.0.7",
+    "markdown-it": "^14.1.0",
+    "markdown-it-mathjax3": "^4.3.2",
+    "@shikijs/vitepress-twoslash": "^1.26.1",
+    "globby": "14.0.0",
+    "fs-extra": "^11.2.0",
+    "gray-matter": "^4.0.3",
+    "fast-glob": "^3.3.2",
+    "feed": "^4.2.2",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vitejs/plugin-vue-jsx": "^4.1.1",
+    "dayjs": "^1.11.10"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
+    }
+  }
+}
