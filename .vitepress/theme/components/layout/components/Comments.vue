@@ -23,12 +23,12 @@ onContentUpdated(() => {
   deleteChild(element);
   // 需要去这个网站注册 https://github.com/settings/developers
   const gitalk = new Gitalk({
-    clientID: "Ov23li69lLAmlZ5EyPso",
-    clientSecret: "cf23522cb2a566af1c36e58f43e238a56f737e7d",
+    clientID: "Ov23liGIwl5Jf43MRtWf",
+    clientSecret: "d5272ed884d1ed79e502c27ae225d8d9e9fc184c",
 		// 仓库名
-    repo: "react-component",
+    repo: "blog",
 		// 所属用户或组织名
-    owner: "componentProject",
+    owner: "moluoxixi",
     admin: ["moluoxixi"],
     id: location.pathname.substring(0, 50), // Ensure uniqueness and length less than 50
     language: "zh-CN",
