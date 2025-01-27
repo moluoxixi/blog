@@ -3,7 +3,7 @@ import matter from "gray-matter";
 import fs from "fs-extra";
 import path from "path";
 
-const includePaths = ["posts/", "note/blog/"];
+const includePaths = ["posts/", "note/"];
 
 export async function getPosts() {
     const paths = await getPostMDFilePaths();
