@@ -9,14 +9,14 @@ import { fileURLToPath, URL } from "node:url";
 import { getSidebar } from "./utils";
 
 import { demoblockPlugin, demoblockVitePlugin } from "vitepress-theme-demoblock";
-import vueJsx from "@vitejs/plugin-vue-jsx";
+// import vueJsx from "@vitejs/plugin-vue-jsx";
 
 async function config() {
 	const posts = await getPosts();
 	const pageSize = 5;
 	const postLength = await getPostLength();
 
-	const note= getSidebar('note/output');
+	const note= getSidebar('note/blog');
 	return {
 		title: "moluoxixi Blog",
 		description: "",
@@ -24,7 +24,7 @@ async function config() {
 		lang: "zh-CN",
 		outDir: "./docs/vitepress",
 		vite: {
-			plugins: [demoblockVitePlugin(), vueJsx()],
+			plugins: [demoblockVitePlugin()],
 			resolve: {
 				alias: {
 					"@": fileURLToPath(new URL("../../src", import.meta.url)),
