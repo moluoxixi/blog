@@ -30,7 +30,7 @@ jobs:
       - name: 检出main分支代码
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          submodules: true
           ref: main
           # 如果未启用 lastUpdated，则不需要
           fetch-depth: 0
