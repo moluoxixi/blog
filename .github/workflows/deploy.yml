@@ -32,6 +32,7 @@ jobs:
         with:
           submodules: true
           ref: main
+          ssh-strict: false
           # 如果未启用 lastUpdated，则不需要
           fetch-depth: 0
       # 如果使用 pnpm，请取消此区域注释
@@ -54,9 +55,9 @@ jobs:
       - name: 下载依赖
         # npm ci / pnpm install / yarn install / bun install
         run: pnpm install
-#      - name: 打包storybook
-#        # npm run docs:build / pnpm docs:build / yarn docs:build / bun run docs:build
-#        run: pnpm storybook:build
+      #      - name: 打包storybook
+      #        # npm run docs:build / pnpm docs:build / yarn docs:build / bun run docs:build
+      #        run: pnpm storybook:build
       - name: 打包vitepress
         # npm run docs:build / pnpm docs:build / yarn docs:build / bun run docs:build
         run: pnpm vitepress:build
