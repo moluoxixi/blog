@@ -11,6 +11,8 @@ pnpm install
 pnpm vitepress:dev
 ```
 
+- 推送代码
+
 - 新增子模块
 
 ```shell

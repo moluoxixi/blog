@@ -6,7 +6,8 @@
   "scripts": {
     "vitepress:dev": "vitepress dev .",
     "vitepress:build": "vitepress build .",
-    "vitepress:preview": "vitepress preview ."
+    "vitepress:preview": "vitepress preview .",
+    "pushAll": "pushAll.sh"
   },
   "dependencies": {
     "gitalk": "^1.8.0",
