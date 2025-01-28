@@ -63,6 +63,7 @@ const data = computed(() => initTags(theme.value.posts));
 
 let selectTag = ref("");
 const toggleTag = (tag: string) => {
+  console.log('data', data)
   selectTag.value = tag;
 };
 // set font-size
