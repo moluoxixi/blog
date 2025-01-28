@@ -7,18 +7,20 @@ const includePaths = ["posts/", "note/"];
 
 export async function getPosts() {
     const paths = await getPostMDFilePaths();
-    const posts = await Promise.all(
+    let posts = await Promise.all(
         paths.map(async (item) => {
             const filePath = path.join(__dirname, "../..", item);
             const content = await fs.readFile(filePath, "utf-8");
             const {data} = matter(content);
+            if(data.hidden) return null;
             data.date = _convertDate(data.date);
             return {
                 frontMatter: data,
                 regularPath: `/${item.replace(".md", ".html")}`,
             };
-        }),
+        })
     );
+    posts = posts.filter(item=>item);
     posts.sort(_compareDate);
     return posts;
 }

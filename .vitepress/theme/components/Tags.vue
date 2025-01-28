@@ -7,7 +7,7 @@
           v-for="(item, key) in data"
 
           class="tag"
-          :style="getFontSize(item.length)"
+          :style="getFontSize(item)"
           :class="{ activetag: selectTag === key }"
       >
         <span>
@@ -37,40 +37,72 @@
       </svg>
       <span class="header-text">{{ selectTag }}</span>
     </h4>
+
+    <div v-if="data[selectTag]?.childrenTags" class="tags">
+      <span
+          @click="toggleChildrenTag(key)"
+          v-for="(item, key) in  data[selectTag].childrenTags"
+
+          class="tag"
+          :style="getFontSize(item)"
+          :class="{ activetag: selectChildrenTag === key }"
+      >
+        <span>
+          <span>{{ key }} </span>
+          <span class="tag-length">{{ item.length }}</span>
+        </span>
+      </span>
+    </div>
+
     <a
         :href="withBase(article.regularPath)"
-        v-for="(article, index) in data[selectTag]"
+        v-for="(article, index) in currentSelectData"
         :key="index"
         class="article"
     >
-      <template v-if="!article.frontMatter.hidden">
-        <div class="title">
-          <div class="title-o"></div>
-          {{ article.frontMatter.title }}
-        </div>
-        <div class="date">{{ article.frontMatter.date }}</div>
-      </template>
+      <div class="title">
+        <div class="title-o"></div>
+        {{ article.frontMatter.title }}
+      </div>
+      <div class="date">{{ article.frontMatter.date }}</div>
     </a>
   </div>
 </template>
 <script lang="ts" setup>
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 import {useData, withBase} from "vitepress";
 import {initTags} from "../utils";
 
+
 const {theme} = useData();
+// TODO: 考虑要不要搞成递归子tags
 const data = computed(() => initTags(theme.value.posts));
+
+
+let selectChildrenTag = ref("");
+const toggleChildrenTag = (tag: string) => {
+  selectChildrenTag.value = tag;
+}
 
 let selectTag = ref("");
 const toggleTag = (tag: string) => {
-  console.log('data', data)
   selectTag.value = tag;
+  selectChildrenTag.value = tag;
 };
+
 // set font-size
-const getFontSize = (length: number) => {
-  let size = length * 0.04 + 0.85;
+const getFontSize = (item) => {
+  const size = item.length * 0.04 + 0.85;
   return {fontSize: `${size}em`};
 };
+
+const currentSelectData = computed(() => {
+  if (selectChildrenTag.value) {
+    return data.value[selectTag.value].childrenTags[selectChildrenTag.value]
+  } else {
+    return data.value[selectTag.value]
+  }
+})
 </script>
 
 <style scoped>
