@@ -120,17 +120,17 @@ async function config() {
 			// 搜索配置
 			search: {
 				// local or algolia
-				// provider: 'local'
-				//#region algolia
-				// algolia有两种方式,使用Crawler爬虫,或者github的DocSearch Scraper Action
-				// 参考https://juejin.cn/post/7157340749065895944
-				provider: "algolia",
-				options: {
-					appId: "DDD3D6CGWQ",
-					apiKey: "3b7df1c9bcf3d1c31fa74e9707936af5",
-					indexName: "blog",
-				},
-				//#endregion
+				provider: 'local'
+				// //#region algolia
+				// // algolia有两种方式,使用Crawler爬虫,或者github的DocSearch Scraper Action
+				// // 参考https://juejin.cn/post/7157340749065895944
+				// provider: "algolia",
+				// options: {
+				// 	appId: "DDD3D6CGWQ",
+				// 	apiKey: "3b7df1c9bcf3d1c31fa74e9707936af5",
+				// 	indexName: "blog",
+				// },
+				// //#endregion
 			},
 		},
 	};
