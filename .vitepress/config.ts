@@ -107,7 +107,7 @@ async function config() {
 				},
 				{
 					text: "react组件库",
-					link: "https://moluoxixi.github.io/blog",
+					link: "https://componentproject.github.io/react-component/storybook/",
 				},
 				...getSidebar("navs"),
 			],
