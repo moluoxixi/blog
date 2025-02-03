@@ -1,16 +1,16 @@
 <template>
   <div class="main">
     <h1 class="tags-header">Tags</h1>
+    <!-- 父标签 -->
     <div class="tags">
       <span
           @click="toggleTag(key)"
           v-for="(item, key) in data"
-
           class="tag"
           :style="getFontSize(item)"
           :class="{ activetag: selectTag === key }"
       >
-        <span>
+        <span v-if="!item.hasPTag">
           <span>{{ key }} </span>
           <span class="tag-length">{{ item.length }}</span>
         </span>
@@ -38,6 +38,7 @@
       <span class="header-text">{{ selectTag }}</span>
     </h4>
 
+    <!-- 子标签 -->
     <div v-if="data[selectTag]?.childrenTags" class="tags">
       <span
           @click="toggleChildrenTag(key)"
@@ -103,6 +104,7 @@ const currentSelectData = computed(() => {
     return data.value[selectTag.value]
   }
 })
+
 </script>
 
 <style scoped>
