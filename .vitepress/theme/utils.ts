@@ -16,8 +16,11 @@ export function initTags(post: Post[]) {
         // tags是数组，需要tags按照数组语法的格式书写
         if (Array.isArray(tags)) {
             tags.forEach((item) => {
-                if (!data[item])data[item] = [];
-                if (element.hidden) return;
+                if (!data[item]) data[item] = [];
+                if (element.hidden) {
+                    console.log(element)
+                    return;
+                }
                 data[item].push(element);
             });
         }
@@ -29,12 +32,14 @@ export function initTags(post: Post[]) {
             const ptags = item.frontMatter.ptags;
             if (Array.isArray(ptags)) {
                 ptags.forEach(ptag => {
-                    data[tag].hasPTag = true;
-                    if (!data[ptag].childrenTags) data[ptag].childrenTags ={};
-                    if(!data[ptag].childrenTags[tag]) data[ptag].childrenTags[tag] = [];
+                    if (ptag !== tag) {
+                        data[tag].hasPTag = true;
+                    }
+                    if (!data[ptag].childrenTags) data[ptag].childrenTags = {};
+                    if (!data[ptag].childrenTags[tag]) data[ptag].childrenTags[tag] = [];
                     data[ptag].childrenTags[tag].push(item);
                 })
-            }else{
+            } else {
                 if (!data[tag].childrenTags) data[tag].childrenTags = {};
                 if (!data[tag].childrenTags[tag]) data[tag].childrenTags[tag] = [];
                 data[tag].childrenTags[tag].push(item);

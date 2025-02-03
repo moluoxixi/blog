@@ -3,18 +3,18 @@
     <h1 class="tags-header">Tags</h1>
     <!-- 父标签 -->
     <div class="tags">
+      <template v-for="(item, key) in data">
       <span
           @click="toggleTag(key)"
-          v-for="(item, key) in data"
+          v-if="!item.hasPTag"
           class="tag"
           :style="getFontSize(item)"
           :class="{ activetag: selectTag === key }"
       >
-        <span v-if="!item.hasPTag">
           <span>{{ key }} </span>
           <span class="tag-length">{{ item.length }}</span>
-        </span>
       </span>
+      </template>
     </div>
 
     <h4 class="header" v-show="selectTag">
