@@ -39,6 +39,7 @@ async function getPostMDFilePaths() {
         ignore: [
             "node_modules",
             "README.md",
+            "**/*.excalidraw.*",
             "**/.idea/**",
             "**/.obsidian/**",
             "**/.space/**"
