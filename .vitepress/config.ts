@@ -78,7 +78,7 @@ async function config() {
 		},
 		themeConfig: {
 			// https://vitepress.dev/reference/default-theme-config
-			avator: "/blog/vitepress/avator.png",
+			avator: "/blog/vitepress/avator1.png",
 			// 标题
 			// siteTitle: "reactComponent",
 			// logo
