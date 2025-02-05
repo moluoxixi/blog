@@ -24,7 +24,6 @@ export function initTags(post: Post[]) {
             });
         }
     }
-
     const tags = Object.keys(data);
     tags.forEach(tag => {
         data[tag].forEach(item => {
@@ -34,6 +33,7 @@ export function initTags(post: Post[]) {
                     if (ptag !== tag) {
                         data[tag].hasPTag = true;
                     }
+                    if(!data[ptag]) data[ptag] = [];
                     if (!data[ptag].childrenTags) data[ptag].childrenTags = {};
                     if (!data[ptag].childrenTags[tag]) data[ptag].childrenTags[tag] = [];
                     data[ptag].childrenTags[tag].push(item);

@@ -92,11 +92,16 @@ const toggleTag = (tag: string) => {
 };
 
 function getTotalLength(item) {
-  return Object.values(item.childrenTags).reduce((p,c)=>p+c.length,0)
+  if (item.childrenTags) {
+    return Object.values(item.childrenTags).reduce((p, c) => p + c.length, 0)
+  } else {
+    return item.length
+  }
 }
+
 // set font-size
 const getFontSize = (item) => {
-  const size = item.length * 0.04 + 0.85;
+  const size = getTotalLength(item) * 0.04 + 0.85;
   return {fontSize: `${size}em`};
 };
 
