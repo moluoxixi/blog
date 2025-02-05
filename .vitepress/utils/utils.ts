@@ -18,7 +18,6 @@ export function initTags(post: Post[]) {
             tags.forEach((item) => {
                 if (!data[item]) data[item] = [];
                 if (element.hidden) {
-                    console.log(element)
                     return;
                 }
                 data[item].push(element);

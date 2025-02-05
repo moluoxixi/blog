@@ -21,7 +21,7 @@
 <script lang="ts" setup>
 import { useData, onContentUpdated } from "vitepress";
 import { shallowRef, ref } from "vue";
-import { getHeaders } from "../../../utils";
+import { getHeaders } from "@/.vitepress/utils/utils.ts";
 
 const { frontmatter, theme } = useData();
 const headers = shallowRef<any>([]);

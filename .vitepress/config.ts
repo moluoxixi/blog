@@ -1,4 +1,4 @@
-import { getPosts, getPostLength } from "./theme/serverUtils";
+import { getPosts, getPostLength } from "./utils/serverUtils.ts";
 import { buildBlogRSS } from "./theme/rss";
 import { transformerTwoslash } from "@shikijs/vitepress-twoslash";
 import mathjax3 from "markdown-it-mathjax3";
@@ -27,7 +27,7 @@ async function config() {
 			plugins: [demoblockVitePlugin(), vueJsx()],
 			resolve: {
 				alias: {
-					"@": fileURLToPath(new URL("../../src", import.meta.url)),
+					"@": fileURLToPath(new URL("../", import.meta.url)),
 				},
 			},
 		},

@@ -12,7 +12,7 @@
           :class="{ activetag: selectTag === key }"
       >
           <span>{{ key }} </span>
-          <span class="tag-length">{{ item.length }}</span>
+          <span class="tag-length">{{ getTotalLength(item) }}</span>
       </span>
       </template>
     </div>
@@ -72,7 +72,7 @@
 <script lang="ts" setup>
 import {computed, ref, watch} from "vue";
 import {useData, withBase} from "vitepress";
-import {initTags} from "../utils";
+import {initTags} from "../../utils/utils.ts";
 
 
 const {theme} = useData();
@@ -91,6 +91,9 @@ const toggleTag = (tag: string) => {
   selectChildrenTag.value = tag;
 };
 
+function getTotalLength(item) {
+  return Object.values(item.childrenTags).reduce((p,c)=>p+c.length,0)
+}
 // set font-size
 const getFontSize = (item) => {
   const size = item.length * 0.04 + 0.85;
