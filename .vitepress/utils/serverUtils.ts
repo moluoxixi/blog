@@ -22,6 +22,7 @@ export async function getPosts() {
     );
     posts = posts.filter(item=>item);
     posts.sort(_compareDate);
+    posts.sort(_compareTop);
     return posts;
 }
 
@@ -32,6 +33,12 @@ function _convertDate(date = new Date().toString()) {
 
 function _compareDate(obj1, obj2) {
     return obj1.frontMatter.date < obj2.frontMatter.date ? 1 : -1;
+}
+
+function _compareTop(obj1, obj2) {
+    const top1=obj1.frontMatter.top||0;
+    const top2=obj2.frontMatter.top||0;
+    return top1 < top2 ? 1 : -1;
 }
 
 async function getPostMDFilePaths() {
