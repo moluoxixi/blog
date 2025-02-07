@@ -137,7 +137,7 @@ async function config() {
             sidebar: {
                 '/note/': note
             },
-            socialLinks: [{icon: "github", link: "https://github.com/componentProject/react-component"}],
+            socialLinks: [{icon: "github", link: "https://github.com/moluoxixi/blog"}],
             // 搜索配置
             search: {
                 // local or algolia
