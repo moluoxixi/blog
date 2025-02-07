@@ -1,29 +1,20 @@
 import fs from "fs";
 import path from "path";
-
+import matter from "gray-matter";
+import fsExtra from "fs-extra";
 /**
  * 将.docs目录下的指定目录里所有md文件转成vitepress的sidebar格式
  * @param fileName
+ * @param excludePaths
  */
 
-export function getSidebar(fileName: string) {
-    const excludePaths = [
-        "index.md",
-        "README.md",
-        ".obsidian",
-        ".idea",
-        ".space",
-        ".makemd",
-        "node_modules",
-        "images",
-        "assets",
-        ".excalidraw"
-    ];
-    const getDirectoryStructure = (srcPath: string) => {
+export async function getSidebar(fileName: string, excludePaths?: string[]) {
+
+    async function getDirectoryStructure  (srcPath: string) {
         const items = {};
         const files = fs.readdirSync(srcPath);
 
-        files.forEach((file) => {
+        const callbacks = files.map(async (file) => {
             const filePath = path.join(srcPath, file);
             const stat = fs.statSync(filePath);
 
@@ -31,20 +22,24 @@ export function getSidebar(fileName: string) {
                 return;
             }
             if (stat.isDirectory()) {
-                items[file] = getDirectoryStructure(filePath);
+                items[file] = await getDirectoryStructure(filePath);
             } else {
                 // 只处理特定类型的文件，例如 .md
                 if (path.extname(file) === ".md") {
+                    const content = await fsExtra.readFile(filePath, "utf-8");
+                    const {data} = matter(content);
+                    if (data.hidden) return null;
                     items[file.replace(".md", "")] = filePath;
                 }
             }
         });
-
+        await Promise.all(callbacks);
         return items;
-    };
+    }
 
     const srcPath = path.join(__dirname, "../..", fileName);
-    const sidebarStructure = getDirectoryStructure(srcPath);
+
+    const sidebarStructure = await getDirectoryStructure(srcPath);
 
     // 转换sidebarStructure为适合VitePress侧边栏的格式
     function getSidebarItems(sidebarStructure, fileName) {
@@ -68,6 +63,5 @@ export function getSidebar(fileName: string) {
         }, []);
     }
 
-    const sidebar = getSidebarItems(sidebarStructure, fileName);
-    return sidebar;
+    return getSidebarItems(sidebarStructure, fileName);
 }
