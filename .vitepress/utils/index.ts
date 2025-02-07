@@ -14,7 +14,7 @@ export async function getSidebar(fileName: string, excludePaths?: string[]) {
         const items = {};
         const files = fs.readdirSync(srcPath);
 
-        const callbacks = files.map(async (file) => {
+        const callbacks = files.map(async (file:any) => {
             const filePath = path.join(srcPath, file);
             const stat = fs.statSync(filePath);
 
@@ -42,7 +42,7 @@ export async function getSidebar(fileName: string, excludePaths?: string[]) {
     const sidebarStructure = await getDirectoryStructure(srcPath);
 
     // 转换sidebarStructure为适合VitePress侧边栏的格式
-    function getSidebarItems(sidebarStructure, fileName) {
+    function getSidebarItems(sidebarStructure:any, fileName:string) {
         return Object.entries(sidebarStructure).reduce((modules, [text, value]) => {
             if (typeof value === "object") {
                 modules.push({
