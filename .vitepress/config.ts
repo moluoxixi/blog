@@ -140,18 +140,7 @@ async function config() {
                 },
                 {
                     text: "react组件库",
-                    collapsible: true,
-                    collapsed: true,
-                    items: [
-                        {
-                            text:'storybook',
-                            link: "https://componentproject.github.io/react-component/storybook/",
-                        },
-                        {
-                            text:'vitepress',
-                            link: "https://componentproject.github.io/react-component/vitepress/",
-                        }
-                    ]
+                    link: "https://componentproject.github.io/react-component/storybook/"
                 },
                 ...navs,
             ],
