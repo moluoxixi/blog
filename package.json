@@ -12,6 +12,15 @@
   "dependencies": {
     "gitalk": "^1.8.0",
     "typescript": "^5.7.3",
+    "dayjs": "^1.11.10",
+    "fast-glob": "^3.3.2",
+    "fs-extra": "^11.2.0",
+    "gray-matter": "^4.0.3",
+    "globby": "14.0.0",
+    "feed": "^4.2.2",
+    "markdown-it": "^14.1.0",
+    "markdown-it-mathjax3": "^4.3.2",
+    "vitepress-theme-demoblock": "^3.0.7",
     "vue": "^3.5.13"
   },
   "devDependencies": {
@@ -19,26 +28,12 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@vue/tsconfig": "^0.7.0",
-    "dayjs": "^1.11.10",
-    "fast-glob": "^3.3.2",
-    "feed": "^4.2.2",
-    "fs-extra": "^11.2.0",
-    "globby": "14.0.0",
-    "gray-matter": "^4.0.3",
-    "markdown-it": "^14.1.0",
-    "markdown-it-mathjax3": "^4.3.2",
     "vite": "^6.0.11",
-    "vitepress": "1.6.3",
-    "vitepress-theme-demoblock": "^3.0.7"
+    "vitepress": "1.6.3"
   },
   "eslintConfig": {
     "extends": [
       "plugin:storybook/recommended"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
-    }
   }
 }

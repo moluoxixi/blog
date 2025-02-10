@@ -22,6 +22,7 @@ async function config() {
         "**/.obsidian/**",
         "**/.space/**"
     ]
+    console.log('ignore', import.meta.env)
     const posts = await getPosts({ignore, postPath});
     const postLength = posts.length;
 
