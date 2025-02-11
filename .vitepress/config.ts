@@ -20,7 +20,8 @@ async function config() {
         "**/*.excalidraw.*",
         "**/.idea/**",
         "**/.obsidian/**",
-        "**/.space/**"
+        "**/.space/**",
+        "**/旧笔记/**"
     ]
     console.log('ignore', import.meta.env)
     const posts = await getPosts({ignore, postPath});
@@ -36,11 +37,20 @@ async function config() {
         "node_modules",
         "images",
         "assets",
-        ".excalidraw"
+        ".excalidraw",
+        "旧笔记"
     ];
     const note = await getSidebar('note', excludePaths);
     const navs = await getSidebar('navs', excludePaths)
     return {
+        //#region build
+        // 不因为无效链接导致失败
+        ignoreDeadLinks: true,
+        // 不打包的markdown文件路径
+        srcExclude: ["**/旧笔记/*.md"],
+        // 将页面元数据提取到单独的 JavaScript 块中，而不是内联在初始 HTML 中。这使每个页面的 HTML 负载更小，并使页面元数据可缓存，从而当站点中有很多页面时可以减少服务器带宽。
+        metaChunk: true,
+        //#endregion
         title: "moluoxixi Blog",
         description: "",
         base: "/blog/vitepress/",
@@ -48,6 +58,29 @@ async function config() {
         outDir: "./docs/vitepress",
         vite: {
             plugins: [demoblockVitePlugin(), vueJsx()],
+            build: {
+                rollupOptions: {
+                    output: {
+                        // 静态资源打包做处理
+                        chunkFileNames: 'static/js/[name]-[hash].js',
+                        entryFileNames: 'static/js/[name]-[hash].js',
+                        assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+                        manualChunks(id) {
+                            if (id.includes('node_modules')) {
+                                return id.toString().split('node_modules/')[1].split('/')[0].toString()
+                            }
+                        }
+                    },
+                },
+                // 大资源拆分
+                chunkSizeWarningLimit: 1000,
+                terserOptions: {
+                    compress: {
+                        drop_console: true,
+                        drop_debugger: true
+                    }
+                }
+            },
             resolve: {
                 alias: {
                     "@": fileURLToPath(new URL("../", import.meta.url)),

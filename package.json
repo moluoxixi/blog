@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "vitepress:dev": "vitepress dev .",
-    "vitepress:build": "vitepress build .",
+    "vitepress:build normal": "vitepress build .",
+    "vitepress:build": "node --max_old_space_size=8096 ./node_modules/vitepress/bin/vitepress.js build .",
     "vitepress:preview": "vitepress preview .",
     "pushAll": "pushAll.sh"
   },
