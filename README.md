@@ -2,20 +2,19 @@
 moluoxixi 的 blog
 
 # use
-- 启动
+- 下载依赖并启动
 ```shell
-# 下载依赖
+#下载依赖
 pnpm installAll
-
-#推送代码
-pnpm pushAll
-
 # 直接启动
 pnpm vitepress:dev
 ```
 
 - 推送代码
+```shell
+pnpm pushAll
 
+```
 - 新增子模块
 
 ```shell
