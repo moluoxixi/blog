@@ -8,7 +8,8 @@
     "vitepress:build normal": "vitepress build .",
     "vitepress:build": "vitepress build .",
     "vitepress:preview": "vitepress preview .",
-    "pushAll": "pushAll.sh"
+    "pushAll": "pushAll.sh",
+    "installAll": "installAll.sh"
   },
   "dependencies": {
     "gitalk": "^1.8.0",

@@ -5,7 +5,10 @@ moluoxixi 的 blog
 - 启动
 ```shell
 # 下载依赖
-pnpm install
+pnpm installAll
+
+#推送代码
+pnpm pushAll
 
 # 直接启动
 pnpm vitepress:dev
