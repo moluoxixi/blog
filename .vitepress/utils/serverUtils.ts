@@ -26,7 +26,7 @@ export async function getPosts({ignore, postPath}) {
 
 function _convertDate(date = new Date().toString()) {
     const json_date = new Date(date).toJSON();
-    return json_date.split("T")[0];
+    return json_date?.split("T")[0];
 }
 
 function _compareDate(obj1, obj2) {

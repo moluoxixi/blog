@@ -20,7 +20,8 @@ async function config() {
         "**/*.excalidraw.*",
         "**/.idea/**",
         "**/.obsidian/**",
-        "**/.space/**"
+        "**/.space/**",
+        "**/templates/**"
     ]
     console.log('ignore', import.meta.env)
     const posts = await getPosts({ignore, postPath});
