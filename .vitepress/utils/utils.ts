@@ -4,7 +4,9 @@ type Post = {
         title?: string;
         tags?: string[];
         description?: string;
+        hidden?: boolean;
     };
+    hidden?: boolean;
     regularPath: string;
 };
 
@@ -17,7 +19,7 @@ export function initTags(post: Post[]) {
         if (Array.isArray(tags)) {
             tags.forEach((item) => {
                 if (!data[item]) data[item] = [];
-                if (element.hidden) {
+                if (element.hidden && element.frontMatter.hidden) {
                     return;
                 }
                 data[item].push(element);
@@ -26,14 +28,14 @@ export function initTags(post: Post[]) {
     }
     const tags = Object.keys(data);
     tags.forEach(tag => {
-        data[tag].forEach(item => {
+        data[tag].forEach((item: any) => {
             const ptags = item.frontMatter.ptags;
             if (Array.isArray(ptags)) {
                 ptags.forEach(ptag => {
                     if (ptag !== tag) {
                         data[tag].hasPTag = true;
                     }
-                    if(!data[ptag]) data[ptag] = [];
+                    if (!data[ptag]) data[ptag] = [];
                     if (!data[ptag].childrenTags) data[ptag].childrenTags = {};
                     if (!data[ptag].childrenTags[tag]) data[ptag].childrenTags[tag] = [];
                     data[ptag].childrenTags[tag].push(item);
@@ -71,8 +73,8 @@ export function useYearSort(post: Post[]) {
     return data;
 }
 
-export function getHeaders(range: any) {
-    const headers = [...document.querySelectorAll(".VPDoc h2,h3,h4,h5,h6")]
+export function getHeaders() {
+    return [...document.querySelectorAll(".VPDoc h2,h3,h4,h5,h6")]
         .filter((el) => el.id && el.hasChildNodes())
         .map((el) => {
             const level = Number(el.tagName[1]);
@@ -82,9 +84,6 @@ export function getHeaders(range: any) {
                 level,
             };
         });
-
-    // return resolveHeaders(headers, range);
-    return headers;
 }
 
 function serializeHeader(h: Element): string {
@@ -100,41 +99,4 @@ function serializeHeader(h: Element): string {
         }
     }
     return ret.trim();
-}
-
-export function resolveHeaders(headers: any, range?: any): any {
-    if (range === false) {
-        return [];
-    }
-    let minLevel = 3;
-    headers.map((header) => {
-        minLevel = Math.min(header.level, minLevel);
-    });
-    const levelsRange = (typeof range === "object" && !Array.isArray(range) ? range.level : range) || minLevel;
-
-    console.log(levelsRange, "levelsRange");
-    const [high, low]: [number, number] =
-        typeof levelsRange === "number" ? [levelsRange, levelsRange] : levelsRange === "deep" ? [2, 6] : levelsRange;
-
-    console.log(high, low, "loooww");
-    headers = headers.filter((h) => h.level >= high && h.level <= low);
-
-    const ret: any = [];
-    outer: for (let i = 0; i < headers.length; i++) {
-        const cur = headers[i];
-        if (i === 0) {
-            ret.push(cur);
-        } else {
-            for (let j = i - 1; j >= 0; j--) {
-                const prev = headers[j];
-                if (prev.level < cur.level) {
-                    (prev.children || (prev.children = [])).push(cur);
-                    continue outer;
-                }
-            }
-            ret.push(cur);
-        }
-    }
-
-    return ret;
 }

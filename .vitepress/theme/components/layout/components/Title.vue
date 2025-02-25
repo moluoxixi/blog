@@ -4,19 +4,12 @@
 </template>
 <script lang="ts" setup>
 import { useData, onContentUpdated } from "vitepress";
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-type pageData = {
-  description: string;
-  title: string;
-  frontmatter: object;
-  headers: object[];
-  lastUpdated: number;
-  relativePath: string;
-};
-const pageData: pageData = useData().page;
+
+const pageData = useData().page;
 const publishDate = ref("");
 dayjs.extend(relativeTime);
 onContentUpdated(() => {

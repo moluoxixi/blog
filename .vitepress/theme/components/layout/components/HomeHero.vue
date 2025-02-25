@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <img :src="theme.avator" width="135" height="135" class="avator" />
+    <img :src="theme.avator" width="135" height="135" class="avator"  alt=""/>
   </div>
 </template>
 <script lang="ts" setup>

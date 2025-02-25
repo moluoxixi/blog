@@ -3,14 +3,14 @@
     <ul class="list">
       <li class="header" v-for="item in headers">
         <a :href="item.link" class="header-h2" v-if="item.level === 2">{{
-          item.title
-        }}</a>
+            item.title
+          }}</a>
         <ul v-if="item.level === 3">
           <li class="header">
             <a
-              :href="item.link"
-              :class="['header-h3', { showIndent: showIndent }]"
-              >{{ item.title }}</a
+                :href="item.link"
+                :class="['header-h3', { showIndent: showIndent }]"
+            >{{ item.title }}</a
             >
           </li>
         </ul>
@@ -19,16 +19,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { useData, onContentUpdated } from "vitepress";
-import { shallowRef, ref } from "vue";
-import { getHeaders } from "@/.vitepress/utils/utils.ts";
+import {onContentUpdated} from "vitepress";
+import {shallowRef, ref} from "vue";
+import {getHeaders} from "../../../../utils/utils";
 
-const { frontmatter, theme } = useData();
 const headers = shallowRef<any>([]);
 const showIndent = ref(false);
 onContentUpdated(() => {
-  headers.value = getHeaders(frontmatter.value.outline ?? theme.value.outline);
-  showIndent.value = headers.value.some((header) => {
+  headers.value = getHeaders();
+  showIndent.value = headers.value.some((header: any) => {
     return header.level === 2;
   });
 });
@@ -43,6 +42,7 @@ onContentUpdated(() => {
   overflow-y: auto;
   max-height: 300px;
 }
+
 .list {
   padding-left: 1.25em;
   margin: 1rem 0;
@@ -51,27 +51,28 @@ onContentUpdated(() => {
   box-sizing: border-box;
 }
 
-.showIndent {
-  padding-left: 1rem;
-}
 ul {
   list-style-type: none;
 }
+
 .header {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 @media (min-width: 768px) {
   .category {
     max-height: 400px;
   }
 }
+
 @media (min-width: 1024px) {
   .category {
     max-height: 450px;
   }
 }
+
 @media (min-width: 1400px) {
   .category {
     position: fixed;

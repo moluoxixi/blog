@@ -7,7 +7,7 @@ import Gitalk from "gitalk";
 import { onContentUpdated } from "vitepress";
 
 // const { route, go } = useRouter();
-function deleteChild(element: HTMLDivElement | null) {
+function deleteChild(element: HTMLDivElement | Element | null) {
   let child = element?.lastElementChild;
   while (child) {
     element?.removeChild(child);
