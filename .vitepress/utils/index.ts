@@ -8,7 +8,7 @@ import fsExtra from "fs-extra";
  * @param excludePaths
  */
 
-export async function getSidebar(fileName: string, excludePaths?: string[]) {
+export async function getSidebar(fileName: string, excludePaths: string[] = []) {
 
     async function getDirectoryStructure  (srcPath: string) {
         const items = {};
@@ -43,7 +43,7 @@ export async function getSidebar(fileName: string, excludePaths?: string[]) {
 
     // 转换sidebarStructure为适合VitePress侧边栏的格式
     function getSidebarItems(sidebarStructure:any, fileName:string) {
-        return Object.entries(sidebarStructure).reduce((modules, [text, value]) => {
+        return Object.entries(sidebarStructure).reduce((modules: any[], [text, value]) => {
             if (typeof value === "object") {
                 modules.push({
                     text,
@@ -52,7 +52,7 @@ export async function getSidebar(fileName: string, excludePaths?: string[]) {
                     items: getSidebarItems(value, fileName),
                 });
             } else {
-                const link = `/${fileName}/${path.relative(srcPath, value).replace(".md", "")}`;
+                const link = `/${fileName}/${path.relative(srcPath, value as string).replace(".md", "")}`;
                 modules.push({
                     activeMatch: link,
                     text,

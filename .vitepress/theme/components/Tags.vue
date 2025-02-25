@@ -70,12 +70,10 @@
 import {computed, ref} from "vue";
 import {useData, withBase} from "vitepress";
 import {initTags} from "../../utils/utils";
-
+import type {TagsType} from '../../utils/utils'
 
 const {theme} = useData();
-// TODO: 考虑要不要搞成递归子tags
-const data = computed(() => initTags(theme.value.posts));
-
+const data = computed<TagsType>(() => initTags(theme.value.posts));
 
 let selectChildrenTag = ref<string|number>("");
 const toggleChildrenTag = (tag: string|number) => {

@@ -1,17 +1,20 @@
-import {getPosts, getPostLength} from "./utils/serverUtils.ts";
+import {getPosts} from "./utils/serverUtils";
 import {buildBlogRSS} from "./theme/rss";
 import {transformerTwoslash} from "@shikijs/vitepress-twoslash";
 import mathjax3 from "markdown-it-mathjax3";
 
-import {fileURLToPath, URL} from "node:url";
 // https://github.com/mingyuLi97/blog
 // https://vitepress.dev/reference/site-config
-import {getSidebar} from "./utils";
+import type {UserConfig} from 'vitepress'
+import {demoblockPlugin, demoblockVitePlugin} from 'vitepress-theme-demoblock'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
-import {demoblockPlugin, demoblockVitePlugin} from "vitepress-theme-demoblock";
-import vueJsx from "@vitejs/plugin-vue-jsx";
+// https://github.com/mingyuLi97/blog
+// https://vitepress.dev/reference/site-config
+import {getSidebar} from './utils'
+import path from 'path'
 
-async function config() {
+async function config(): Promise<Awaited<UserConfig>> {
     const pageSize = 5;
     const postPath = '/note'
     const ignore = [
@@ -23,7 +26,6 @@ async function config() {
         "**/.space/**",
         "**/templates/**"
     ]
-    console.log('ignore', import.meta.env)
     const posts = await getPosts({ignore, postPath});
     const postLength = posts.length;
 
@@ -56,11 +58,9 @@ async function config() {
         lang: "zh-CN",
         outDir: "./docs/vitepress",
         vite: {
-            plugins: [demoblockVitePlugin(), vueJsx()],
+            plugins: [demoblockVitePlugin() as any, vueJsx()],
             build: {
-                rollupOptions: {
-                    exclude: ["**/旧笔记/**","/旧笔记/**"],
-                },
+                rollupOptions: {},
                 // 大资源拆分
                 chunkSizeWarningLimit: 1000,
                 terserOptions: {
@@ -72,7 +72,7 @@ async function config() {
             },
             resolve: {
                 alias: {
-                    "@": fileURLToPath(new URL("../", import.meta.url)),
+                    "@": path.resolve(__dirname, '../../src'),
                 },
             },
         },
@@ -152,11 +152,11 @@ async function config() {
                     collapsed: true,
                     items: [
                         {
-                            text:'storybook',
+                            text: 'storybook',
                             link: "https://componentproject.github.io/vue-component/storybook/",
                         },
                         {
-                            text:'vitepress',
+                            text: 'vitepress',
                             link: "https://componentproject.github.io/vue-component/vitepress/",
                         }
                     ]
@@ -191,4 +191,5 @@ async function config() {
     };
 }
 
-export default config();
+const viteConfig = await config()
+export default viteConfig
