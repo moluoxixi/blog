@@ -1,5 +1,7 @@
 {
-  "name": "vuecomponent",
+  "name": "blog",
+  "packageManager": "pnpm@8.6.0",
+  "keywords": ["blog","博客"],
   "version": "0.0.0",
   "private": true,
   "type": "module",
