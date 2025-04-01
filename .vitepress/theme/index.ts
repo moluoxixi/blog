@@ -6,7 +6,7 @@ import TwoslashFloatingVue from "@shikijs/vitepress-twoslash/client";
 import "@shikijs/vitepress-twoslash/style.css";
 import type { EnhanceAppContext } from "vitepress";
 
-import "./custom.css";
+import "./assets/main.css";
 
 import "vitepress-theme-demoblock/dist/theme/styles/index.css";
 import Demo from "vitepress-theme-demoblock/dist/client/components/Demo.vue";

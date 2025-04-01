@@ -7,13 +7,25 @@ import mathjax3 from "markdown-it-mathjax3";
 // https://vitepress.dev/reference/site-config
 import type {UserConfig} from 'vitepress'
 import {demoblockPlugin, demoblockVitePlugin} from 'vitepress-theme-demoblock'
-import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://github.com/mingyuLi97/blog
 // https://vitepress.dev/reference/site-config
 import {getSidebar} from './utils'
-import path from 'path'
+import path from 'node:path'
+import {fileURLToPath} from "node:url";
+// vite vue插件
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import {ElementPlusResolver} from 'unplugin-vue-components/resolvers'
 
+// 其余vite插件
+import autoprefixer from 'autoprefixer'
+import tailwindcss from '@tailwindcss/postcss'
+
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 async function config(): Promise<Awaited<UserConfig>> {
     const pageSize = 5;
     const postPath = '/note'
@@ -58,7 +70,20 @@ async function config(): Promise<Awaited<UserConfig>> {
         lang: "zh-CN",
         outDir: "./docs/vitepress",
         vite: {
-            plugins: [demoblockVitePlugin() as any, vueJsx()],
+            plugins: [
+                demoblockVitePlugin() as any,
+                vueJsx(),
+                // 自动引入
+                AutoImport({
+                    imports: ['vue'],
+                    resolvers: [ElementPlusResolver()],
+                    dts: path.resolve(__dirname, '../typings/auto-imports.d.ts'),
+                }),
+                Components({
+                    resolvers: [ElementPlusResolver()],
+                    dts: path.resolve(__dirname, '../typings/components.d.ts'),
+                }),
+            ],
             build: {
                 rollupOptions: {},
                 // 大资源拆分
@@ -73,6 +98,18 @@ async function config(): Promise<Awaited<UserConfig>> {
             resolve: {
                 alias: {
                     "@": path.resolve(__dirname, '../../src'),
+                },
+            },
+            css: {
+                postcss: {
+                    plugins: [
+                        tailwindcss(),
+                        // 自动添加厂商前缀
+                        autoprefixer(),
+                    ],
+                },
+                preprocessorOptions: {
+                    scss: {api: 'modern-compiler'},
                 },
             },
         },

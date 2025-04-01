@@ -1,3 +1,4 @@
+@import "../../../node_modules/tailwindcss";
 @import "https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.6.0/style.min.css";
 
 :root {
@@ -44,4 +45,27 @@
 
 .VPDocOutlineDropdown {
   display: none !important;
+}
+#app{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.Layout{
+  flex: 1;
+  overflow: hidden;
+  min-height: 0 !important;
+}
+.VPContent{
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.VPHome{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  margin-bottom: 0 ! important;
 }
