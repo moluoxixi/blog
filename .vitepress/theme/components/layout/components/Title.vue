@@ -1,5 +1,5 @@
 <template>
-  <h1 class="title">{{ pageData.title }}</h1>
+  <h1 class="title" :id="pageData.title">{{ pageData.title }}</h1>
   <div class="date">🕒 Published at: {{ publishDate }}</div>
 </template>
 <script lang="ts" setup>

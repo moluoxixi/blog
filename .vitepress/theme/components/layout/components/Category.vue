@@ -2,12 +2,13 @@
   <div class="category" v-if="headers.length > 0">
     <ul class="list">
       <li class="header" v-for="item in headers">
-        <a :href="item.link" class="header-h2" v-if="item.level === 2">{{
+        <a @click.prevent="scrollTo(item)" :href="item.link" class="header-h2" v-if="item.level === 2">{{
             item.title
           }}</a>
         <ul v-if="item.level === 3">
           <li class="header">
             <a
+                @click.prevent="scrollTo(item)"
                 :href="item.link"
                 :class="['header-h3', { showIndent: showIndent }]"
             >{{ item.title }}</a
@@ -25,6 +26,18 @@ import {getHeaders} from "../../../../utils/utils";
 
 const headers = shallowRef<any>([]);
 const showIndent = ref(false);
+
+function scrollTo(item){
+  console.log('item',item)
+  const VPContent=document.querySelector('.VPContent')
+  const currentTitle=VPContent?.querySelector(item.link)
+  currentTitle?.scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  })
+  console.log('currentTitle', currentTitle)
+}
+
 onContentUpdated(() => {
   headers.value = getHeaders();
   showIndent.value = headers.value.some((header: any) => {
