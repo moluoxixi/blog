@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @layer base {
   :root {
@@ -75,11 +73,12 @@
   }
 }
 
-@layer utilities{
-  .flex-1-auto{
+@layer utilities {
+  .flex-1-auto {
     @apply flex-1 overflow-auto
   }
-  .flex-1-hidden{
+
+  .flex-1-hidden {
     @apply flex-1 overflow-hidden
   }
 }

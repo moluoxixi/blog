@@ -12,7 +12,7 @@ const { theme } = useData();
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 300px;
+  height: 220px;
 }
 .avator {
   border-radius: 50%;
