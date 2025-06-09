@@ -48,7 +48,7 @@
     "tailwindcss-animate": "^1.0.7",
     "unplugin-auto-import": "^19.1.2",
     "unplugin-vue-components": "^28.4.1",
-    "vite": "^6.0.11",
+    "vite": "npm:rolldown-vite@latest",
     "vitepress": "^1.6.3"
   },
   "eslintConfig": {
