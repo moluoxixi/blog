@@ -17,8 +17,7 @@
     "vitepress:build": "vitepress build .",
     "vitepress:preview": "vitepress preview .",
     "pushAll": "pushAll.sh",
-    "installAll": "installAll.sh",
-    "postinstall": "installAll.sh"
+    "installAll": "installAll.sh"
   },
   "dependencies": {
     "dayjs": "^1.11.10",
